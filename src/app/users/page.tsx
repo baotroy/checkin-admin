@@ -2,6 +2,7 @@
 import request from "@/common/api";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Button from "../components/inputs/Button";
 
 type User = {
   username: string;
@@ -28,12 +29,13 @@ const Users = () => {
 
   return (
     <>
-      <table>
+      <table width={"100%"}>
         <thead>
           <tr>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Status</th>
+            <th className="text-left">Username</th>
+            <th className="text-left">Role</th>
+            <th className="text-left">Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +45,10 @@ const Users = () => {
                 <td>{user.username}</td>
                 <td>{Roles[user.role]}</td>
                 <td>{user.deleted ? "INACTIVE" : "ACTIVE"}</td>
+                <td>
+                  <Button label="Edit" type="primary" />
+                  <Button label="Deactive" type="danger" />
+                </td>
               </tr>
             );
           })}
