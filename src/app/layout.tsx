@@ -5,26 +5,35 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
+import ToasterContext from "./context/ToasterContext";
+// import useSWR from "swr";
+// import { redirect } from "next/navigation";
+// import AuthContext from "./context/AuthContext";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  // const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // const pathname = usePathname();
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
+  // if (!currentUser) {
+  //   console.log("🚀 ~ currentUser:", currentUser);
+  //   return redirect("/auth/signin");
+  // }
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 1000);
+  // }, []);
 
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          {loading ? <Loader /> : children}
+          {children}
+          <ToasterContext />
         </div>
       </body>
     </html>
