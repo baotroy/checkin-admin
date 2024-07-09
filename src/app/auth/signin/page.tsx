@@ -1,6 +1,6 @@
 "use client";
 // import Image from "next/image";
-import AuthForm from "@/app/components/AuthForm";
+import AuthForm from "./AuthForm";
 import { redirect } from "next/navigation";
 import useSWR from "swr";
 export default function SignIn() {

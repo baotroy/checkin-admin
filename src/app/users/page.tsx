@@ -3,6 +3,7 @@ import request from "@/common/api";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Button from "../components/inputs/Button";
+import Paginator from "../components/paginator/paginator";
 
 type User = {
   username: string;
@@ -11,24 +12,35 @@ type User = {
 };
 const Roles = {
   "1": "Super Admin",
-  "-1": "user",
+  "-1": "User",
 };
 const Users = () => {
   const [users, setUsers] = useState([] as User[]);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(20);
   useEffect(() => {
     request(`/admin/users?page=${page}&limit=${limit}`, "GET")
       .then((res) => {
         setUsers(res.data.users);
+        setTotalPages(res.data.totalPages);
       })
       .catch((err) => {
         toast.error("Something went wrong!");
       });
   }, [page, limit]);
 
+  const handleOnClick = (page: number) => {
+    // todo next page
+  };
+
   return (
     <>
+      {/* <Paginator
+        currentPage={page}
+        totalPages={totalPages}
+        onClick={handleOnClick}
+      /> */}
       <table width={"100%"}>
         <thead>
           <tr>

@@ -19,6 +19,7 @@ interface ButtonProps {
     | "outline";
   additionalClass?: string;
   icon?: IconProps;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -27,12 +28,14 @@ const Button: React.FC<ButtonProps> = ({
   additionalClass,
   type = "primary",
   icon,
+  disabled,
 }) => {
   return (
     <>
       <button
         onClick={handleOnClick}
         className={clsx("custom-button", type, additionalClass)}
+        disabled={disabled}
       >
         {icon && (icon.position === "left" || !icon.position) ? (
           <icon.icon className="inline-block" size={icon.size || 12} />

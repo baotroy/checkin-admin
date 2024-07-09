@@ -1,8 +1,9 @@
 "use client";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import Users from "./users/page";
-import getAuth from "@/common/localStorage";
+// import getAuth from "@/app/components/localStorage";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 // export const metadata: Metadata = {
 //   title:
@@ -11,15 +12,13 @@ import getAuth from "@/common/localStorage";
 // };
 
 export default function Home() {
-  let currentUser = getAuth();
-  if (!currentUser) {
-    redirect("/auth/signin");
-  }
   return (
     <>
-      <DefaultLayout>
-        <Users />
-      </DefaultLayout>
+      <ProtectedRoute>
+        <DefaultLayout>
+          <Users />
+        </DefaultLayout>
+      </ProtectedRoute>
     </>
   );
 }

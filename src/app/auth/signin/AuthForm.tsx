@@ -3,15 +3,15 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Input from "./inputs/Input";
-import Button from "./Button";
+import Input from "@/app/components/inputs/Input";
+import Button from "@/app/components/inputs/Button";
 // import AuthSocialButton from "./AuthSocialButton";
 import toast from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { mutate } from "swr";
 import { get } from "http";
-import getAuth from "@/common/localStorage";
+import getAuth from "@/app/components/localStorage";
 
 type Variant = "LOGIN" | "REGISTER";
 const AuthForm = () => {
@@ -161,9 +161,7 @@ const AuthForm = () => {
             errors={errors}
             disabled={isLoading}
           />
-          <Button disabled={isLoading} fullWidth type="submit">
-            {variant === "LOGIN" ? "Sign in" : "Register"}
-          </Button>
+          <Button disabled={isLoading} label="Sign In" />
         </form>
       </div>
     </div>
