@@ -25,13 +25,6 @@ export default function SignIn() {
                 lg:px-8"
     >
       <div>
-        {/* <Image
-          alt="logo"
-          height="48"
-          width="48"
-          src="/images/logo.jpeg"
-          className="mx-auto w-auto"
-        /> */}
         <h2
           className="
           text-gray-900

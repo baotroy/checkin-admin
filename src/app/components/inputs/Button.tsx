@@ -17,7 +17,7 @@ interface ButtonProps {
     | "success"
     | "reset"
     | "outline";
-  additionalClass?: string;
+    className?: string;
   icon?: IconProps;
   disabled?: boolean;
 }
@@ -25,7 +25,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   label,
   handleOnClick,
-  additionalClass,
+  className,
   type = "primary",
   icon,
   disabled,
@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
     <>
       <button
         onClick={handleOnClick}
-        className={clsx("custom-button", type, additionalClass)}
+        className={clsx("custom-button", type, className)}
         disabled={disabled}
       >
         {icon && (icon.position === "left" || !icon.position) ? (

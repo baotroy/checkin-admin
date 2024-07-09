@@ -57,7 +57,7 @@ const AuthForm = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
     const response = await axios
-      .post(`${process.env.NEXT_PUBLIC_API_URI}/admin/login`, data)
+      .post(`${process.env.NEXT_PUBLIC_API_URI}/auth/login`, data)
       .then((response) => {
         console.log("🚀 ~ .then ~ response:", response.data);
         // mutate("user", response.data);
@@ -74,7 +74,7 @@ const AuthForm = () => {
         "🚀 ~ constonSubmit:SubmitHandler<FieldValues>= ~ value:",
         value,
       );
-      router.push("/");
+      router.push("/users");
     }
     // if (variant === "LOGIN") {
     //   signIn("credentials", {

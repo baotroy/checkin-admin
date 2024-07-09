@@ -1,10 +1,10 @@
-import { AuthUser } from "./type";
+import { AuthUserType } from "@/app/types";
 
-const getAuth = (): AuthUser | null => {
+const getAuth = (): AuthUserType | null => {
   try {
     const auth = localStorage.getItem("user");
     if (auth) {
-      return JSON.parse(auth) as AuthUser;
+      return JSON.parse(auth) as AuthUserType;
     }
     return null;
   } catch (error) {

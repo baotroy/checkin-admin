@@ -4,8 +4,8 @@ import "flatpickr/dist/flatpickr.min.css";
 import "@/css/satoshi.css";
 import "@/css/globals.css";
 import React, { useEffect, useState } from "react";
-import Loader from "@/components/common/Loader";
-// import ToasterContext from "./context/ToasterContext";
+// import getAuth from "./components/localStorage";
+// import { redirect } from "next/navigation";
 // import useSWR from "swr";
 // import { redirect } from "next/navigation";
 // import AuthContext from "./context/AuthContext";
@@ -15,6 +15,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  console.log("afasdfsdf");
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>

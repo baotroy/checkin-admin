@@ -1,7 +1,7 @@
 "use client";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 // import { redirect } from "next/navigation";
-import Users from "./users/page";
+import Users from "@/app/users/page";
 // import getAuth from "@/app/components/localStorage";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
@@ -14,11 +14,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 export default function Home() {
   return (
     <>
-      <ProtectedRoute>
-        <DefaultLayout>
-          <Users />
-        </DefaultLayout>
-      </ProtectedRoute>
+      <Users />
     </>
   );
 }
