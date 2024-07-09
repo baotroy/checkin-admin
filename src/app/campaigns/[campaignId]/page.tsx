@@ -1,10 +1,10 @@
 "use client";
-import request from "@/common/api";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import Button from "../components/inputs/Button";
-import Paginator from "../components/paginator/paginator";
-import Link from "next/link";
+// import request from "@/common/api";
+// import { useEffect, useState } from "react";
+// import toast from "react-hot-toast";
+// import Button from "../components/inputs/Button";
+// import Paginator from "../components/paginator/paginator";
+// import Link from "next/link";
 
 type User = {
   _id: string;

@@ -1,8 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+interface ModalProps {
+  onClose: () => void;
+  children: React.ReactNode;
+  title?: string;
 
-const Modal = ({ onClose, children, title }) => {
-  const handleCloseClick = (e) => {
+}
+const Modal : React.FC<ModalProps> = ({ onClose, children, title }) => {
+  const handleCloseClick = (e: any) => {
+    console.log("close");
     e.preventDefault();
     onClose();
   };
@@ -11,7 +17,7 @@ const Modal = ({ onClose, children, title }) => {
     <div className="modal-overlay">
       {/* Wrap the whole Modal inside the newly created StyledModalWrapper
             and use the ref */}
-      <div className="modal-wrapper">
+      <div className="modal-wrapper  min-h-[30vw] min-w-[30vw]">
         <div className="modal">
           <div className="modal-header">
             <a href="#" onClick={handleCloseClick}>

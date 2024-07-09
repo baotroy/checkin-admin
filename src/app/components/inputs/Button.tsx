@@ -8,7 +8,7 @@ interface IconProps {
 }
 interface ButtonProps {
   label: string;
-  handleOnClick?: () => void;
+  onClick?: () => void;
   type?:
     | "primary"
     | "secondary"
@@ -24,7 +24,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
   label,
-  handleOnClick,
+  onClick,
   className,
   type = "primary",
   icon,
@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <>
       <button
-        onClick={handleOnClick}
+        onClick={onClick}
         className={clsx("custom-button", type, className)}
         disabled={disabled}
       >
