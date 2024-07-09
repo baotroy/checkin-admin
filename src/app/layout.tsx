@@ -48,6 +48,7 @@ export default function RootLayout({
 
           {/* </ProtectedRoute> */}
         </div>
+        <div id="modal-root"></div>
       </body>
     </html>
   );

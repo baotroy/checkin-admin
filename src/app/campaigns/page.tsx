@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import Button from "../components/inputs/Button";
 import Paginator from "../components/paginator/paginator";
 import { UserType } from "@/app/types";
-import ModalCampaign from "./component/modal-campaign";
+import Modal from "./component/modal-campaign";
 
 interface ICampaign {
   _id?: string;
@@ -44,6 +44,7 @@ const Campaigns = () => {
   };
 
   const toggleModal = () => {
+    console.log("modalOpen", modalOpen);
     setModalOpen(!modalOpen);
   };
 
@@ -63,6 +64,7 @@ const Campaigns = () => {
         // class="btn btn-primary"
         data-toggle="modal"
         data-target="#exampleModal"
+        onClick={toggleModal}
       >
         Launch demo modal
       </button>
@@ -93,13 +95,11 @@ const Campaigns = () => {
           })}
         </tbody>
       </table>
-      <ModalCampaign
-        modalOpen={modalOpen}
-        handleCloseClick={toggleModal}
-        // handleSaveClick={handleSaveClick}
-      >
-        <div>MODAL</div>
-      </ModalCampaign>
+      {modalOpen && (
+        <Modal onClose={() => toggleModal} title={"Test"}>
+          Hello from the modal!
+        </Modal>
+      )}
     </>
   );
 };
