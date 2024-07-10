@@ -6,18 +6,8 @@
 // import Paginator from "../components/paginator/paginator";
 // import Link from "next/link";
 
-type User = {
-  _id: string;
-  username: string;
-  role: "1" | "-1";
-  deleted: string;
-};
-const Roles = {
-  "1": "Super Admin",
-  "-1": "User",
-};
 interface IParams {
-  conversationId: string;
+  id: string;
 }
 const UserDetail = ({ params }: { params: IParams }) => {
   console.log("🚀 ~ UserDetail ~ params:", params);
@@ -41,7 +31,7 @@ const UserDetail = ({ params }: { params: IParams }) => {
   //     // todo next page
   //   };
 
-  return <>User page</>;
+  return <>Campaign details page {params.id}</>;
 };
 
 export default UserDetail;

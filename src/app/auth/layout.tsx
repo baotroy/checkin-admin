@@ -1,7 +1,6 @@
 "use client";
 import "jsvectormap/dist/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
-import "@/css/satoshi.css";
 import "@/css/globals.css";
 import React, { useEffect, useState } from "react";
 // import getAuth from "./components/localStorage";
@@ -17,7 +16,7 @@ export default function RootLayout({
 }>) {
   // const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
-  console.log("afasdfsdf");
+  console.log("adfasdfdsaf");
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>

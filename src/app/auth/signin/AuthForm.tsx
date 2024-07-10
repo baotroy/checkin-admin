@@ -9,8 +9,6 @@ import Button from "@/app/components/inputs/Button";
 import toast from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import { mutate } from "swr";
-import { get } from "http";
 import getAuth from "@/app/components/localStorage";
 
 type Variant = "LOGIN" | "REGISTER";
@@ -18,20 +16,17 @@ const AuthForm = () => {
   // const session = useCook();
   // console.log("🚀 ~ AuthForm ~ session:", session);
   const router = useRouter();
-  const auth = getAuth();
-  if (auth) {
-    router.push("/");
-  }
 
   const [variant, setVariant] = useState<Variant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
+  const [auth, setAuth] = useState(getAuth());
 
-  // useEffect(() => {
-  //   if (session?.status === "authenticated") {
-  //     console.log("Authenticated");
-  //     router.push("/users");
-  //   }
-  // }, [session?.status]);
+  useEffect(() => {
+    if (auth) {
+      console.log("Authenticated");
+      router.push("/users");
+    }
+  }, [auth, router]);
 
   // const toggleVariant = useCallback(() => {
   //   if (variant === "LOGIN") {
@@ -63,19 +58,20 @@ const AuthForm = () => {
         // mutate("user", response.data);
         localStorage.setItem("user", JSON.stringify(response.data));
         // redirect("/");
+        setAuth(response.data);
         return response.data;
       })
       .finally(() => {
         setIsLoading(false);
       });
-    if (response) {
-      const value = localStorage.getItem("user");
-      console.log(
-        "🚀 ~ constonSubmit:SubmitHandler<FieldValues>= ~ value:",
-        value,
-      );
-      router.push("/users");
-    }
+    // if (response) {
+    //   const value = localStorage.getItem("user");
+    //   console.log(
+    //     "🚀 ~ constonSubmit:SubmitHandler<FieldValues>= ~ value:",
+    //     value,
+    //   );
+    //   router.refresh();
+    // }
     // if (variant === "LOGIN") {
     //   signIn("credentials", {
     //     ...data,

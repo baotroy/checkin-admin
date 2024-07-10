@@ -12,6 +12,7 @@ interface TextBoxProps {
   maxLength?: number;
   readonly?: boolean;
   isError?: boolean;
+  min?: number;
 }
 
 const TextBox: React.FC<TextBoxProps> = ({
@@ -24,6 +25,7 @@ const TextBox: React.FC<TextBoxProps> = ({
   maxLength,
   readonly = false,
   isError = false,
+  min,
 }) => {
   return (
     <>
@@ -36,6 +38,7 @@ const TextBox: React.FC<TextBoxProps> = ({
         readOnly={readonly}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        min={min}
       />
     </>
   );

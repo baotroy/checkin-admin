@@ -16,3 +16,8 @@ export enum UserRoleType {
     USER = -1
 
 }
+
+export interface IProvince {
+    _id: string;
+    name: string
+}

@@ -1,17 +1,18 @@
 "use client";
+import getAuth from "@/app/components/localStorage";
 // import Image from "next/image";
 import AuthForm from "./AuthForm";
-import { redirect } from "next/navigation";
-import useSWR from "swr";
+import { useEffect, useState } from "react";
+
 export default function SignIn() {
-  // const { data: currentUser } = useSWR("user", (key) => {
-  //   const value = localStorage.getItem(key);
-  //   return !!value ? JSON.parse(value) : undefined;
-  // });
-  // // localStorage.getItem("userSession");
-  // if (currentUser) {
-  //   redirect("/");
-  // }
+  // const [auth, setAuth] = useState(getAuth());
+  // useEffect(() => {
+  //   if (auth) {
+  //     console.log("Authenticated");
+  //     window.location.href = "/users";
+  //   }
+  // }, [auth]);
+
   return (
     <div
       className="
