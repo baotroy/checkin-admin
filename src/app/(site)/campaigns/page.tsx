@@ -21,6 +21,8 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import getProvinces from "@/common/locations";
 import Link from "next/link";
+import Embed from "@/app/embed/[campaignId]/page";
+import TextArea from "@/app/components/inputs/TextArea";
 
 const Campaigns = () => {
   type Variant = "REGISTER" | "EDIT";
@@ -42,6 +44,9 @@ const Campaigns = () => {
     date.setHours(0, 0, 0, 0);
     return date;
   };
+
+  const [embedItem, setEmbedItem] = useState<ICampaign>();
+  const [embedModalOpen, setEmbedModalOpen] = useState(false);
 
   // campaign
   const [name, setName] = useState("");
@@ -131,7 +136,7 @@ const Campaigns = () => {
     setAddress(campaign.address);
     setTime(campaign.time);
     setQuantity(campaign.quantity);
-    setProvinceId(campaign.provinceId || "");
+    setProvinceId(campaign.provinceId.toString() || "");
     setDescription(campaign.description || "");
     setSltdUser(campaign.userId._id);
 
@@ -193,6 +198,13 @@ const Campaigns = () => {
         toast.error("Something went wrong!");
       });
   };
+
+  const embed =  (item : ICampaign) => {
+    // show model embed
+    setEmbedItem(item);
+    setEmbedModalOpen(true);
+  }
+
   // const handleViewUser = (userId: string) => {
   //   console.log(userId);
   // };
@@ -264,34 +276,33 @@ const Campaigns = () => {
                     className="mr-1"
                     onClick={() => editingCampaing(item)}
                   />
-                  <Button label="Deactive" type="danger" />
-                  <Link href={`/campaigns/${item._id}`}>View</Link>
+                  <Button label="Deactive" type="danger" className="mr-1" />
+                  <Link href={`/campaigns/${item._id}`} className="text-primary mr-1">View</Link>
+                  <Link href={'#'} className="text-warning" onClick={()=> embed(item)}>Embed</Link>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+
+      {/* EMBED MODEL */}
+      {embedModalOpen && ( 
+        <Modal onClose={() => setEmbedModalOpen(false)} title={`Embed ${embedItem?.name}`} additionalClass="min-h-[250px]">
+          <TextArea value={`<iframe src="${window.location.origin}/embed/${embedItem?._id}" width="100%" height="500px"></iframe>`} additionalClass="w-full"/>
+          <div className="float-right my-4">
+            <Button
+                label="Close"
+                type="reset"
+                onClick={() => setEmbedModalOpen(false)}
+              />
+          </div>
+        </Modal>)
+        }
+
       {modalOpen && (
         <Modal onClose={() => setModalOpen(false)} title={"Create Campaign"}>
           <div>
-            {/* @JoiSchema(Joi.objectId().required())
-	userId: string
-
-  name: string
-
-	@JoiSchema(Joi.string().optional())
-	description: string
-
-	@JoiSchema(Joi.string().optional())
-	address: string
-
-	@JoiSchema(Joi.number().optional())
-	time: number
-
-	@JoiSchema(Joi.number().optional())
-	quantity: number */}
-
             <div>
               <label>Client</label>
               <SelectBox
