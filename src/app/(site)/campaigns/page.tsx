@@ -10,6 +10,7 @@ import {
   IUser,
   UserRoleType,
   UserType,
+  Variant,
 } from "@/app/types";
 import Modal from "./component/modal-campaign";
 import getAuth from "@/app/components/localStorage";
@@ -21,11 +22,10 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import getProvinces from "@/common/locations";
 import Link from "next/link";
-import Embed from "@/app/embed/[campaignId]/page";
 import TextArea from "@/app/components/inputs/TextArea";
 
 const Campaigns = () => {
-  type Variant = "REGISTER" | "EDIT";
+ 
   const [campaigns, setCampaigns] = useState([] as ICampaign[]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -36,7 +36,7 @@ const Campaigns = () => {
   const [filterUser, setFilterUser] = useState("");
   const [provinces, setProvinces] = useState([] as IProvince[]);
   const [editingCampaignId, setEditingCampaignId] = useState<string>();
-  const [mode, setMode] = useState<Variant>("REGISTER");
+  const [mode, setMode] = useState<Variant>(Variant.REGISTER);
 
   const minDate = () => {
     const date = new Date();
@@ -127,7 +127,7 @@ const Campaigns = () => {
     }
   };
 
-  const editingCampaing = (campaign: ICampaign) => {
+  const editingCampaign = (campaign: ICampaign) => {
     console.log("🚀 ~ editingCampaing ~ campaign:", campaign);
     // todo edit
     setEditingCampaignId(campaign._id);
@@ -140,7 +140,7 @@ const Campaigns = () => {
     setDescription(campaign.description || "");
     setSltdUser(campaign.userId._id);
 
-    setMode("EDIT");
+    setMode(Variant.UPDATE);
     setModalOpen(true);
   };
 
@@ -226,7 +226,7 @@ const Campaigns = () => {
         label="Create Campaign"
         type="primary"
         onClick={() => {
-          setMode("REGISTER");
+          setMode(Variant.REGISTER);
           setModalOpen(true);
         }}
       />
@@ -274,7 +274,7 @@ const Campaigns = () => {
                     label="Edit"
                     type="primary"
                     className="mr-1"
-                    onClick={() => editingCampaing(item)}
+                    onClick={() => editingCampaign(item)}
                   />
                   <Button label="Deactive" type="danger" className="mr-1" />
                   <Link href={`/campaigns/${item._id}`} className="text-primary mr-1">View</Link>

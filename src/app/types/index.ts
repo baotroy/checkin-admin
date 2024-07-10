@@ -14,7 +14,6 @@ export type AuthUserType = {
 export enum UserRoleType {
     ADMIN = 1,
     USER = -1
-
 }
 
 export interface IProvince {
@@ -43,4 +42,9 @@ export interface ICampaign {
   export interface IUser {
     _id: string;
     name: string;
+  }
+
+  export enum Variant {
+    REGISTER = "REGISTER",
+    UPDATE = "UPDATE",
   }

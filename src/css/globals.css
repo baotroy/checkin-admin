@@ -209,6 +209,11 @@ textarea {
  @apply bg-error
 } */
 
+.error {
+  @apply text-[#ff0000]
+  
+}
+
 .custom-button {
  @apply rounded px-3 py-1.5 font-medium text-[14px] text-white select-none cursor-pointer
 }
