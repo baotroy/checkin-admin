@@ -50,7 +50,7 @@ const Embed = ({ params }: { params: IParams }) => {
         setCampaign(null);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [params.campaignId]);
 
   // async function onSubmit(event: FormEvent<HTMLFormElement>) {
   //   event.preventDefault();
