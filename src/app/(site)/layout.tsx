@@ -23,7 +23,7 @@ export default function RootLayout({
   // const pathname = usePathname();
   const [currentUser, setCurrentUser] = useState(getAuth());
   // const currentUser = getAuth();
-  const pathname = usePathname();
+  // const pathname = usePathname();
   // console.log("🚀 ~ pathname:", pathname);
   // console.log("🚀 ~ currentUser:", currentUser);
   // const router = useRouter();
@@ -33,10 +33,17 @@ export default function RootLayout({
   //     router.push("/auth/signin");
   //   }
   // }, [currentUser, pathname, router]);
-  if (!currentUser) {
-    console.log("redirecting to signin");
-    window.location.href = "/auth/signin";
-  }
+  useEffect(() => {
+
+    if (!currentUser) {
+      console.log("redirecting to signin");
+      redirect("/auth/signin");
+    }
+  } , [currentUser]);
+  // if (!currentUser) {
+  //   console.log("redirecting to signin");
+  //   window.location.href = "/auth/signin";
+  // }
   // useEffect(() => {
   //   setTimeout(() => setLoading(false), 1000);
   // }, []);

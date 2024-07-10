@@ -1,13 +1,14 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { useRouter } from "next/router";
 import { redirect } from "next/navigation";
 
-const SignOut: React.FC = () => {
-  localStorage.removeItem("user");
+const SignOut = () => {
+  useEffect(() => {
+    window.localStorage.removeItem("user"); redirect("/auth/signin");}, []);
+  
 
-  redirect("/auth/signin");
+ 
   return <></>;
 };
 

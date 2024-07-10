@@ -24,7 +24,6 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   disabled = false,
   isError = false,
 }) => {
-  console.log("items", items)
   return (
     <select
       value={value}

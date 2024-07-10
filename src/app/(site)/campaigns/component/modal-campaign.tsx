@@ -34,7 +34,7 @@ const Modal : React.FC<ModalProps> = ({ onClose, children, title, additionalClas
 
   return ReactDOM.createPortal(
     modalContent,
-    document.getElementById("modal-root"),
+    document.getElementById("modal-root")!,
   );
 };
 
