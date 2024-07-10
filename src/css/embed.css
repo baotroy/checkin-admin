@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+
+h1 {
+    @apply text-3xl font-bold mb-2
+}
+
+.form {
+    @apply m-2
+}
+.form-register div {
+    @apply w-full mb-2
+}
+
+input {
+    @apply rounded border border-bodydark py-[6px]  px-1 w-full
+}
+   
+/* .custom-input.error {
+@apply bg-error
+} */
+
+.custom-button {
+    @apply rounded px-3 py-1.5 font-medium text-[14px] text-white select-none cursor-pointer mr-2
+}
+
+.custom-button.primary {
+    @apply bg-primary
+}
+.custom-button.outline {
+    @apply border border-bodydark text-graydark outline-none
+  }
+  
+
+.required {
+  @apply text-[#ff0000]
+}

@@ -1,13 +1,13 @@
 "use client";
 import "jsvectormap/dist/jsvectormap.css";
-import "flatpickr/dist/flatpickr.min.css";
+// import "flatpickr/dist/flatpickr.min.css";
 import "@/css/globals.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
-import ToasterContext from "./context/ToasterContext";
+import ToasterContext from "../context/ToasterContext";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import getAuth from "./components/localStorage";
-import SignIn from "./auth/signin/page";
+import getAuth from "../components/localStorage";
+import SignIn from "../auth/signin/page";
 import { redirect, usePathname, useRouter } from "next/navigation";
 // import useSWR from "swr";
 // import { redirect } from "next/navigation";
@@ -24,8 +24,8 @@ export default function RootLayout({
   const [currentUser, setCurrentUser] = useState(getAuth());
   // const currentUser = getAuth();
   const pathname = usePathname();
-  console.log("🚀 ~ pathname:", pathname);
-  console.log("🚀 ~ currentUser:", currentUser);
+  // console.log("🚀 ~ pathname:", pathname);
+  // console.log("🚀 ~ currentUser:", currentUser);
   // const router = useRouter();
   // useEffect(() => {
   //   if (!currentUser && pathname !== "/auth/signin") {
@@ -33,10 +33,10 @@ export default function RootLayout({
   //     router.push("/auth/signin");
   //   }
   // }, [currentUser, pathname, router]);
-  // if (!currentUser && pathname !== "/auth/signin") {
-  //   console.log("redirecting to signin");
-  //   // window.location.href = "/auth/signin";
-  // }
+  if (!currentUser) {
+    console.log("redirecting to signin");
+    window.location.href = "/auth/signin";
+  }
   // useEffect(() => {
   //   setTimeout(() => setLoading(false), 1000);
   // }, []);
@@ -46,6 +46,7 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
           {/* <ProtectedRoute> */}
+          {/* <Loader /> */}
           <ToasterContext />
           {currentUser ? <DefaultLayout>{children}</DefaultLayout> : <SignIn />}
           {/* <DefaultLayout>{children}</DefaultLayout> */}

@@ -2,8 +2,8 @@
 import request from "@/common/api";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Button from "../components/inputs/Button";
-import Paginator from "../components/paginator/paginator";
+import Button from "@/app/components/inputs/Button";
+import Paginator from "@/app/components/paginator/paginator";
 import { UserType } from "@/app/types";
 import ModalUserDetail from "./component/modalUserDetail";
 const Roles = {

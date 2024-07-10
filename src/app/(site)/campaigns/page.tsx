@@ -2,38 +2,25 @@
 import request from "@/common/api";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Button from "../components/inputs/Button";
-import Paginator from "../components/paginator/paginator";
-import { IProvince, UserRoleType, UserType } from "@/app/types";
+import Button from "@/app/components/inputs/Button";
+import Paginator from "@/app/components/paginator/paginator";
+import {
+  ICampaign,
+  IProvince,
+  IUser,
+  UserRoleType,
+  UserType,
+} from "@/app/types";
 import Modal from "./component/modal-campaign";
-import getAuth from "../components/localStorage";
-import SelectBox from "../components/inputs/SelectBox";
-import TextBox from "../components/inputs/TextBox";
+import getAuth from "@/app/components/localStorage";
+import SelectBox from "@/app/components/inputs/SelectBox";
+import TextBox from "@/app/components/inputs/TextBox";
 import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import getProvinces from "@/common/locations";
 import Link from "next/link";
-interface ICampaign {
-  _id?: string;
-  name: string;
-  deleted: boolean;
-  userId: {
-    _id: string;
-    name: string;
-  };
-  address: string;
-  quantity: number;
-  time: number;
-  description?: string;
-  provinceId: string;
-}
-
-interface IUser {
-  _id: string;
-  name: string;
-}
 
 const Campaigns = () => {
   type Variant = "REGISTER" | "EDIT";

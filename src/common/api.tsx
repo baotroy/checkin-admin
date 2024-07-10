@@ -15,7 +15,7 @@ const request = async (
   try {
     return await axios({ url: uri, method: method, headers, data });
   } catch (error: any) {
-    return error;
+    throw error;
   }
 };
 export default request;

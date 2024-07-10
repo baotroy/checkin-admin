@@ -12,6 +12,7 @@
     "apexcharts": "^3.45.2",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.11",
     "flatpickr": "^4.6.13",
     "jsvectormap": "^1.6.0",
     "next": "^14.2.4",

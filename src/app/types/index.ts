@@ -21,3 +21,26 @@ export interface IProvince {
     _id: string;
     name: string
 }
+
+export interface ICampaign {
+    _id?: string;
+    name: string;
+    deleted: boolean;
+    userId: {
+      _id: string;
+      name: string;
+    };
+    address: string;
+    quantity: number;
+    time: number;
+    description?: string;
+    provinceId: {
+      _id: string;
+      name: string;
+    };
+  }
+  
+  export interface IUser {
+    _id: string;
+    name: string;
+  }

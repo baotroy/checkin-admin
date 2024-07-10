@@ -1,9 +1,9 @@
 "use client";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 // import { redirect } from "next/navigation";
-import Users from "@/app/users/page";
 // import getAuth from "@/app/components/localStorage";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import Users from "./users/page";
 
 // export const metadata: Metadata = {
 //   title:
