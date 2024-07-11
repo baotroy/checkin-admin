@@ -19,12 +19,13 @@ interface IParams {
 }
 
 const Embed = ({ params }: { params: IParams }) => {
+  const [campaign, setCampaign] = useState<ICampaign | null>(null);
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, formState: { errors }, setError, reset } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     setLoading(true);
     request("/campaigns/register/" + params.campaignId, "POST", data)
       .then(() => {
-        // reset();
         toast.success("Đăng kí thành công");
       })
       .catch((err) => {
@@ -40,12 +41,9 @@ const Embed = ({ params }: { params: IParams }) => {
       .finally(() => setLoading(false));
   };
 
-  const [campaign, setCampaign] = useState<ICampaign | null>(null);
-  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
-    // fetch campaign by id
     request("/campaigns/" + params.campaignId, "GET")
       .then((campaign) => {
         setCampaign(campaign.data);
@@ -66,7 +64,7 @@ const Embed = ({ params }: { params: IParams }) => {
   return (
     <>
       {loading ? (
-        <div className="flex min-h-screen flex-row items-center justify-center">
+        <div className="min-h-[100vh]">
           <Loader />
         </div>
       ) : campaign === null ? <>Sự kiện không tồn tại!</> : (
@@ -135,7 +133,7 @@ const Embed = ({ params }: { params: IParams }) => {
                 </div>
               </div>
             </div>
-            <div className="float-right">
+            <div className="float-right mt-2">
               <button
                 className="custom-button primary mr-2"
                 disabled={loading}
