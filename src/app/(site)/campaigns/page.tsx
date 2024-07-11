@@ -291,13 +291,23 @@ const Campaigns = () => {
       {/* EMBED MODEL */}
       {embedModalOpen && ( 
         <Modal onClose={() => setEmbedModalOpen(false)} title={`Embed ${embedItem?.name}`} additionalClass="min-h-[250px]">
-          <TextArea value={`<iframe src="${window.location.origin}/embed/${embedItem?._id}" width="100%" height="500px"></iframe>`} additionalClass="w-full"/>
+          <TextArea readonly value={`<iframe src="${window.location.origin}/embed/${embedItem?._id}" width="100%" height="500px"></iframe>`} additionalClass="w-full"/>
           <div className="float-right my-4">
+          <Button
+                label="Copy"
+                type="success"
+                className="mr-1"
+                onClick={() => {
+                  navigator.clipboard.writeText(`<iframe src="${window.location.origin}/embed/${embedItem?._id}" width="100%" height="500px"></iframe>`);
+                  toast.success("Copied!");
+                }}
+              />
             <Button
                 label="Close"
                 type="reset"
                 onClick={() => setEmbedModalOpen(false)}
               />
+              
           </div>
         </Modal>)
         }

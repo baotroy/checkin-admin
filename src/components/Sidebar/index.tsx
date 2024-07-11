@@ -7,6 +7,8 @@ import Image from "next/image";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
 import ClickOutside from "@/components/ClickOutside";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { UserRoleType } from "@/app/types";
+import getAuth from "@/app/components/localStorage";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -47,6 +49,7 @@ const menuGroups = [
         ),
         label: "Users",
         route: "/users",
+        role: UserRoleType.ADMIN,
         // children: [{ label: "eCommerce", route: "/" }],
       },
       {
@@ -336,9 +339,9 @@ const menuGroups = [
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
-
+  const auth = getAuth()
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
@@ -390,14 +393,25 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </h3>
 
                 <ul className="mb-6 flex flex-col gap-1.5">
-                  {group.menuItems.map((menuItem, menuIndex) => (
-                    <SidebarItem
+                  {group.menuItems.map((menuItem, menuIndex) => {
+                    if (menuItem.role) {
+                      if (auth?.role === menuItem.role) {
+                        return <SidebarItem
+                        key={menuIndex}
+                        item={menuItem}
+                        pageName={pageName}
+                        setPageName={setPageName}
+                      />
+                      } else return null
+                    }
+                    return (<SidebarItem
                       key={menuIndex}
                       item={menuItem}
                       pageName={pageName}
                       setPageName={setPageName}
-                    />
-                  ))}
+                    />)
+                    
+                    })}
                 </ul>
               </div>
             ))}

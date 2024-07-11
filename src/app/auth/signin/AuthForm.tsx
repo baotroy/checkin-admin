@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import getAuth from "@/app/components/localStorage";
+import { UserRoleType } from "@/app/types";
 
 type Variant = "LOGIN" | "REGISTER";
 const AuthForm = () => {
@@ -23,8 +24,11 @@ const AuthForm = () => {
 
   useEffect(() => {
     if (auth) {
-      console.log("Authenticated");
-      router.push("/users");
+      if (auth.role === UserRoleType.ADMIN) {
+        router.push("/users");
+      } else {
+        router.push("/campaigns");
+      }
     }
   }, [auth, router]);
 

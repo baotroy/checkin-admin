@@ -141,7 +141,7 @@ const Embed = ({ params }: { params: IParams }) => {
               >
                 Đăng kí
               </button>
-              <button className="custom-button outline" onClick={resetForm}>
+              <button className="custom-button outline" onClick={resetForm} disabled={loading}>
                 Xóa
               </button>
             </div>
