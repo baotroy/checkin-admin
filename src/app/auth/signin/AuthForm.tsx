@@ -146,7 +146,7 @@ const AuthForm = () => {
           )} */}
 
           <Input
-            label="username"
+            label="Username"
             id="username"
             type="username"
             register={register}
