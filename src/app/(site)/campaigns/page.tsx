@@ -144,11 +144,11 @@ const Campaigns = () => {
     setModalOpen(true);
   };
 
-  useEffect(() => {
-    if (modalOpen === false) {
-      resetForm();
-    }
-  }, [modalOpen]);
+  // useEffect(() => {
+  //   if (modalOpen === false) {
+  //     resetForm();
+  //   }
+  // }, [modalOpen, resetForm]);
 
   const handleSaveClick = () => {
     //todo save
@@ -165,6 +165,7 @@ const Campaigns = () => {
         toast.success("Campaign created successfully!");
         setCampaigns([...campaigns, res.data]);
         setModalOpen(false);
+        resetForm();
       })
       .catch((err) => {
         toast.error("Something went wrong!");
@@ -193,6 +194,7 @@ const Campaigns = () => {
           }),
         );
         setModalOpen(false);
+        resetForm();
       })
       .catch((err) => {
         toast.error("Something went wrong!");

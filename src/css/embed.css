@@ -32,6 +32,6 @@ input {
   }
   
 
-.required {
+.required, .error {
   @apply text-[#ff0000]
 }

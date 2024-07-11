@@ -61,7 +61,7 @@ const Users = () => {
   };
 
 
-  const { register, handleSubmit, getValues,  formState: { errors }, } = useForm<IFormInput>();
+  const { register, handleSubmit, getValues,  formState: { errors } } = useForm<IFormInput>();
   console.log(errors);
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     setLoading(true);
@@ -152,7 +152,7 @@ const Users = () => {
                   }
                 })}
               />
-               <FormErrorMessage>{errors?.username && errors.username.message}</FormErrorMessage>
+               <FormErrorMessage errors={errors} fieldName="username" />
             </div>
             <div>
               <div><label>Email</label></div>
@@ -165,7 +165,7 @@ const Users = () => {
                   },
                 })}
                />
-               <FormErrorMessage>{errors?.email && errors.email.message}</FormErrorMessage>
+              <FormErrorMessage errors={errors} fieldName="email" />
             </div>
             <div>
             <div><label>Password</label></div>
@@ -178,7 +178,7 @@ const Users = () => {
                 }               
               })}
               />
-              <FormErrorMessage>{errors?.password && errors.password.message}</FormErrorMessage>
+              <FormErrorMessage errors={errors} fieldName="password" />
             </div>
             <div>
             <div><label>Re-Password</label></div>
@@ -191,7 +191,7 @@ const Users = () => {
                   }           
                 })}
               />
-              <FormErrorMessage>{errors?.rePassword && errors.rePassword.message}</FormErrorMessage>
+              <FormErrorMessage errors={errors} fieldName="rePassword" />
             </div>
             <div>
             <div><label>Role</label></div>

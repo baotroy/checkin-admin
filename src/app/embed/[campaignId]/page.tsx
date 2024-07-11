@@ -1,12 +1,12 @@
 "use client";
 import { ICampaign } from "@/app/types";
 import request from "@/common/api";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "@/app/embed/components/loader";
 import toast from "react-hot-toast";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { dateFormat, getTimezoneOffsetFormat } from "@/common/utils";
-import Error from 'next/error'
+import FormErrorMessage from "@/app/components/FormErrorMessage";
 
 interface IFormInput {
   name: string;
@@ -19,7 +19,7 @@ interface IParams {
 }
 
 const Embed = ({ params }: { params: IParams }) => {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const { register, handleSubmit, formState: { errors }, setError, reset } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     setLoading(true);
     request("/campaigns/register/" + params.campaignId, "POST", data)
@@ -27,7 +27,14 @@ const Embed = ({ params }: { params: IParams }) => {
         // reset();
         toast.success("Đăng kí thành công");
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err.response.status === 409) {
+          setError("phone", {
+            type: "manual",
+            message: "Số điện thoại đã đăng kí",
+          })
+        }
+
         toast.error("Đăng kí thất bại, đã có lỗi xảy ra");
       })
       .finally(() => setLoading(false));
@@ -36,9 +43,6 @@ const Embed = ({ params }: { params: IParams }) => {
   const [campaign, setCampaign] = useState<ICampaign | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
 
   useEffect(() => {
     // fetch campaign by id
@@ -52,39 +56,12 @@ const Embed = ({ params }: { params: IParams }) => {
       .finally(() => setLoading(false));
   }, [params.campaignId]);
 
-  // async function onSubmit(event: FormEvent<HTMLFormElement>) {
-  //   event.preventDefault();
-  //   setLoading(true);
-  //   request("/campaigns/register/" + params.campaignId, "POST", {
-  //     name,
-  //     phone,
-  //     email,
-  //   })
-  //     .then(() => {
-  //       reset();
-  //       toast.success("Đăng kí thành công");
-  //     })
-  //     .finally(() => setLoading(false));
-  // }
-
-  // const submit = () => {
-  //   setLoading(true);
-  //   request("/campaigns/register/" + params.campaignId, "POST", {
-  //     name,
-  //     phone,
-  //     email,
-  //   })
-  //     .then(() => {
-  //       reset();
-  //       toast.success("Đăng kí thành công");
-  //     })
-  //     .finally(() => setLoading(false));
-  // };
-
-  const reset = () => {
-    setName("");
-    setPhone("");
-    setEmail("");
+  const resetForm = () => {
+    reset({
+      name: "",
+      phone: "",
+      email: "",
+    });
   };
   return (
     <>
@@ -111,11 +88,10 @@ const Embed = ({ params }: { params: IParams }) => {
                 <div>
                   <input
                   id="name"
-                    // value={name}
                     required
-                    // onChange={(e) => setName(e.target.value)}
                     {...register("name", { required: true })}
                   />
+                  <FormErrorMessage errors={errors} fieldName="name" />
                 </div>
               </div>
               <div>
@@ -127,9 +103,7 @@ const Embed = ({ params }: { params: IParams }) => {
                 <div>
                   <input
                   id="phone"
-                    // value={phone}
                     required
-                    // onChange={(e) => setPhone(e.target.value)}
                     {...register("phone", {
                       required: true,
                       pattern: {
@@ -138,6 +112,7 @@ const Embed = ({ params }: { params: IParams }) => {
                       },
                     })}
                   />
+                  <FormErrorMessage errors={errors} fieldName="phone" />
                 </div>
               </div>
               <div>
@@ -147,9 +122,7 @@ const Embed = ({ params }: { params: IParams }) => {
                 <div>
                   <input
                   id="email"
-                    // value={email}
                     type="email"
-                    // onChange={(e) => setEmail(e.target.value)}
                     {...register("email", {
                       required: true,
                       pattern: {
@@ -158,6 +131,7 @@ const Embed = ({ params }: { params: IParams }) => {
                       },
                     })}
                   />
+                  <FormErrorMessage errors={errors} fieldName="email" />
                 </div>
               </div>
             </div>
@@ -165,12 +139,11 @@ const Embed = ({ params }: { params: IParams }) => {
               <button
                 className="custom-button primary mr-2"
                 disabled={loading}
-                // onClick={submit}
                 type="submit"
               >
                 Đăng kí
               </button>
-              <button className="custom-button outline" onClick={reset}>
+              <button className="custom-button outline" onClick={resetForm}>
                 Xóa
               </button>
             </div>
